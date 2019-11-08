@@ -10,25 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace kursivaya
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Info.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Info : Window
     {
-        public MainWindow()
+        public Info()
         {
             InitializeComponent();
-        }
-
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            SettingsWindow settings = new SettingsWindow();
-            settings.Show();
         }
     }
 }

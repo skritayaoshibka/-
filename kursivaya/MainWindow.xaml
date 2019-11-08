@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursivaya"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="767.575" Width="803.678" Icon="Пикчи/upload_icon_124041.ico">
+    <Grid Margin="0,0,2,-2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="567*"/>
+            <ColumnDefinition Width="223*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="settingsButton" Content="Button" HorizontalAlignment="Left" Height="99.819" Margin="254.153,253.526,0,0" VerticalAlignment="Top" Width="175.544" Click="SettingsButton_Click"/>
+
     </Grid>
 </Window>

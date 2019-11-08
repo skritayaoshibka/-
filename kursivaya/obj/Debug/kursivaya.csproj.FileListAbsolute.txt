@@ -1,0 +1,17 @@
+D:\VS Projects\C#\kursivaya\kursivaya\bin\Debug\kursivaya.exe.config
+D:\VS Projects\C#\kursivaya\kursivaya\bin\Debug\kursivaya.exe
+D:\VS Projects\C#\kursivaya\kursivaya\bin\Debug\kursivaya.pdb
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.csprojAssemblyReference.cache
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\MainWindow.g.cs
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\SettingsWindow.g.cs
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\App.g.cs
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya_MarkupCompile.cache
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya_MarkupCompile.lref
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\MainWindow.baml
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\SettingsWindow.baml
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.g.resources
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.Properties.Resources.resources
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.csproj.GenerateResource.cache
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.csproj.CoreCompileInputs.cache
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.exe
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.pdb
