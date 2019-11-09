@@ -8,7 +8,18 @@
         Title="Чат" Height="595.575" Width="740.678" Icon="Пикчи/chat-bubble-outline_119299.ico">
     <Window.Resources>
         <ControlTemplate x:Key="infoButton" TargetType="{x:Type Button}">
-            <Image Height="Auto" Source="Пикчи/4213426-about-description-help-info-information-notification_115427.ico" Stretch="Fill"/>
+            <ControlTemplate.Resources>
+                <Storyboard x:Key="OnMouseEnter1"/>
+            </ControlTemplate.Resources>
+            <Image x:Name="image" Height="Auto" Source="Пикчи/4213426-about-description-help-info-information-notification_115427.ico" Stretch="Fill" OpacityMask="Black"/>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="OpacityMask" TargetName="image" Value="#66000000"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="OpacityMask" TargetName="image" Value="#FC000000"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
         </ControlTemplate>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -40,12 +51,26 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Image HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Source="Пикчи/Gear.ico"/>
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="OnMouseEnter1">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.OpacityMask).(SolidColorBrush.Color)" Storyboard.TargetName="image">
+                                    <EasingColorKeyFrame KeyTime="0" Value="Black"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Image x:Name="image" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Source="Пикчи/Gear.ico" OpacityMask="Black"/>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefault" Value="False"/>
+                            <Trigger Property="IsDefault" Value="False"/>
                             <Trigger Property="IsDefaulted" Value="true"/>
-                            <Trigger Property="IsMouseOver" Value="true"/>
-                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="OpacityMask" TargetName="image" Value="#B2000000"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="OpacityMask" TargetName="image" Value="#FC000000"/>
+                            </Trigger>
                             <Trigger Property="IsEnabled" Value="false"/>
+                            <Trigger Property="IsDefault" Value="False"/>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -63,20 +88,18 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" SnapsToDevicePixels="true" CornerRadius="5">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" SnapsToDevicePixels="true" CornerRadius="5" Background="#FFDEDEDE">
                             <Label Content="Подключиться" FontFamily="Segoe UI Light" BorderBrush="#00000000" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#B2DEDEDE"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                                <Setter Property="Background" TargetName="border" Value="#FF939393"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
@@ -87,17 +110,25 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Storyboard x:Key="OnMouseEnter1">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="settingsButton">
+                <EasingColorKeyFrame KeyTime="0" Value="#B2DDDDDD"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+    </Window.Triggers>
     <Grid Margin="0,0,2,-2">
 
-        <Button x:Name="settingsButton" Content="Настройки" HorizontalAlignment="Left" Height="39" Margin="682.678,6,0,0" VerticalAlignment="Top" Width="39" Click="SettingsButton_Click" Style="{DynamicResource settingsButton}"/>
+        <Button x:Name="settingsButton" Content="Настройки" HorizontalAlignment="Left" Height="39" Margin="682.678,6,0,0" VerticalAlignment="Top" Width="39" Click="SettingsButton_Click" Style="{DynamicResource settingsButton}" Background="#FFDDDDDD"/>
         <ListBox x:Name="usersListBox" HorizontalAlignment="Left" Height="410" Margin="10,49,0,0" VerticalAlignment="Top" Width="214" BorderBrush="Black"/>
         <Label x:Name="usersCountLabel" Content="Пользователи в чате: 0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="214"/>
         <Label Content="Сообщения" HorizontalAlignment="Left" Margin="250,10,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="18"/>
         <ListBox x:Name="messagesListBox" Height="410" Margin="224,49,10,0" VerticalAlignment="Top" Padding="-4,0,0,0" BorderBrush="Black"/>
         <Button x:Name="connectButton" HorizontalAlignment="Left" Margin="15,469,0,0" VerticalAlignment="Top" Width="204" Height="50" FontSize="18" Style="{DynamicResource connectButton}"/>
         <Border BorderBrush="Black" BorderThickness="1" Margin="224,464,10,35.575" CornerRadius="5">
-            <TextBox x:Name="messageTextBox" TextWrapping="Wrap" Text="TextBox" Background="Transparent" BorderBrush="#00ABADB3" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="18" Margin="0,0,-1,0"/>
+            <TextBox x:Name="messageTextBox" TextWrapping="Wrap" Text="TextBox" Background="Transparent" BorderBrush="#00ABADB3" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="18" Margin="0,0,-1,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
         </Border>
         <Button x:Name="infoButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="33" Template="{DynamicResource infoButton}" Height="33" Margin="644.678,11,0,0"/>
 

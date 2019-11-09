@@ -4,22 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursivaya"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+
         mc:Ignorable="d"
         Title="Настройки" Height="450" Width="393.061" Icon="Пикчи/Gear.ico">
-    <Grid>
+    <Grid Margin="0,0,2,0">
+
         <Label Content="IP-адрес сервера" HorizontalAlignment="Left" Margin="20,29,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <Border BorderBrush="Black" BorderThickness="2" Height="52.94" Margin="180.641,19.5,19.779,0" VerticalAlignment="Top" CornerRadius="15">
-            <TextBox x:Name="IPtextBox" TextWrapping="Wrap" Text="255.255.255.255" Background="Transparent" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="18" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="177.614"/>
+        <Border BorderBrush="Black" BorderThickness="2" Height="52.94" Margin="180.641,19.5,19.779,0" VerticalAlignment="Top" CornerRadius="5">
+            <xctk:MaskedTextBox x:Name="IPmaskedTextBox"
+                             Mask="000\.000\.000\.000" FontFamily="Segoe UI Light" FontSize="29" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="___.___.___.___" PromptChar=" "/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="2" Height="52.94" Margin="180.641,77.44,19.779,0" VerticalAlignment="Top" CornerRadius="5">
+            <xctk:MaskedTextBox x:Name="PortmaskedTextBox"
+                             Mask="00000" FontFamily="Segoe UI Light" FontSize="29" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="___.___.___.___" PromptChar=" " BorderThickness="0" AutoSelectBehavior="OnFocus"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="2" Margin="31,350,232,20" CornerRadius="5">
+            <Button x:Name="acceptButton" Content="Применить" Background="#00DDDDDD" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="16" Click="AcceptButton_Click"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="2" Margin="231,350,31,20" CornerRadius="5">
+            <Button x:Name="cancelButton" Content="Отмена" Background="#00DDDDDD" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="16"/>
         </Border>
         <Label Content="Порт" HorizontalAlignment="Left" Height="45.404" Margin="20,81.208,0,0" VerticalAlignment="Top" Width="144.963" FontFamily="Segoe UI Light" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Border BorderBrush="Black" BorderThickness="2" Height="52.94" Margin="180.641,77.44,19.779,0" VerticalAlignment="Top" CornerRadius="15">
-            <TextBox x:Name="PorttextBox" TextWrapping="Wrap" Text="255.255.255.255" Background="Transparent" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="18" TextAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="177.614"/>
-        </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="31,350,232,20" CornerRadius="15">
-            <Button x:Name="acceptButton" Content="Применить" Background="#00DDDDDD" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="16"/>
-        </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="231,350,31,20" CornerRadius="15">
-            <Button x:Name="cancelButton" Content="Отмена" Background="#00DDDDDD" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="16"/>
+        <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="46" Margin="254,149,0,0" VerticalAlignment="Top" Width="109" CornerRadius="5">
+            <Button Content="localhost" Background="#00DDDDDD" BorderBrush="#00707070" FontFamily="Segoe UI Light" FontSize="18" BorderThickness="0" Click="Button_Click"/>
         </Border>
 
     </Grid>

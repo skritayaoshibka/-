@@ -23,5 +23,19 @@ namespace kursivaya
         {
             InitializeComponent();
         }
+
+        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        {
+            string test = IPmaskedTextBox.Text;
+            test = test.Replace("_", "");
+            test = test.Replace(',', '.');
+            MessageBox.Show(test);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            IPmaskedTextBox.Text = "127.0.0.1";
+            PortmaskedTextBox.Text = "Надо потом добавить";
+        }
     }
 }
