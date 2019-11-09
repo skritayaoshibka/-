@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursivaya"
         mc:Ignorable="d"
-        Title="Настройки" Height="450" Width="393.061" Icon="Пикчи/upload_icon_124041.ico">
+        Title="Настройки" Height="450" Width="393.061" Icon="Пикчи/Gear.ico">
     <Grid>
         <Label Content="IP-адрес сервера" HorizontalAlignment="Left" Margin="20,29,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Border BorderBrush="Black" BorderThickness="2" Height="52.94" Margin="180.641,19.5,19.779,0" VerticalAlignment="Top" CornerRadius="15">

@@ -108,9 +108,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Пикчи\upload_icon_124041.ico" />
+    <Resource Include="Пикчи\Gear.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Пикчи\chat-bubble-outline_119299.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Пикчи\4213426-about-description-help-info-information-notification_115427.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

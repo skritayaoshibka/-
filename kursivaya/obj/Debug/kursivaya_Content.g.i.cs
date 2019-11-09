@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%9f%d0%b8%d0%ba%d1%87%d0%b8/upload_icon_124041.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("%d0%9f%d0%b8%d0%ba%d1%87%d0%b8/4213426-about-description-help-info-information-no" +
+    "tification_115427.ico")]
 
 

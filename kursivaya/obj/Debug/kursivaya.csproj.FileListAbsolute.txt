@@ -15,3 +15,5 @@ D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.csproj.GenerateResourc
 D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.csproj.CoreCompileInputs.cache
 D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.exe
 D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.pdb
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\Info.g.cs
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\Info.baml

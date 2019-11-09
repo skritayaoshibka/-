@@ -5,13 +5,101 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursivaya"
         mc:Ignorable="d"
-        Title="MainWindow" Height="767.575" Width="803.678" Icon="Пикчи/upload_icon_124041.ico">
+        Title="Чат" Height="595.575" Width="740.678" Icon="Пикчи/chat-bubble-outline_119299.ico">
+    <Window.Resources>
+        <ControlTemplate x:Key="infoButton" TargetType="{x:Type Button}">
+            <Image Height="Auto" Source="Пикчи/4213426-about-description-help-info-information-notification_115427.ico" Stretch="Fill"/>
+        </ControlTemplate>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="settingsButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Source="Пикчи/Gear.ico"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="connectButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="2" SnapsToDevicePixels="true" CornerRadius="5">
+                            <Label Content="Подключиться" FontFamily="Segoe UI Light" BorderBrush="#00000000" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid Margin="0,0,2,-2">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="567*"/>
-            <ColumnDefinition Width="223*"/>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="settingsButton" Content="Button" HorizontalAlignment="Left" Height="99.819" Margin="254.153,253.526,0,0" VerticalAlignment="Top" Width="175.544" Click="SettingsButton_Click"/>
+
+        <Button x:Name="settingsButton" Content="Настройки" HorizontalAlignment="Left" Height="39" Margin="682.678,6,0,0" VerticalAlignment="Top" Width="39" Click="SettingsButton_Click" Style="{DynamicResource settingsButton}"/>
+        <ListBox x:Name="usersListBox" HorizontalAlignment="Left" Height="410" Margin="10,49,0,0" VerticalAlignment="Top" Width="214" BorderBrush="Black"/>
+        <Label x:Name="usersCountLabel" Content="Пользователи в чате: 0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="214"/>
+        <Label Content="Сообщения" HorizontalAlignment="Left" Margin="250,10,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="18"/>
+        <ListBox x:Name="messagesListBox" Height="410" Margin="224,49,10,0" VerticalAlignment="Top" Padding="-4,0,0,0" BorderBrush="Black"/>
+        <Button x:Name="connectButton" HorizontalAlignment="Left" Margin="15,469,0,0" VerticalAlignment="Top" Width="204" Height="50" FontSize="18" Style="{DynamicResource connectButton}"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="224,464,10,35.575" CornerRadius="5">
+            <TextBox x:Name="messageTextBox" TextWrapping="Wrap" Text="TextBox" Background="Transparent" BorderBrush="#00ABADB3" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="18" Margin="0,0,-1,0"/>
+        </Border>
+        <Button x:Name="infoButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="33" Template="{DynamicResource infoButton}" Height="33" Margin="644.678,11,0,0"/>
 
     </Grid>
 </Window>
