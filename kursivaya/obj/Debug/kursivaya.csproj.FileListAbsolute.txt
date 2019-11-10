@@ -15,8 +15,6 @@ D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.csproj.GenerateResourc
 D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.csproj.CoreCompileInputs.cache
 D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.exe
 D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.pdb
-D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\Info.g.cs
-D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\Info.baml
 D:\VS Projects\C#\kursivaya\kursivaya\bin\Debug\Xceed.Wpf.AvalonDock.dll
 D:\VS Projects\C#\kursivaya\kursivaya\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
 D:\VS Projects\C#\kursivaya\kursivaya\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
@@ -33,3 +31,7 @@ D:\VS Projects\C#\kursivaya\kursivaya\bin\Debug\ru\Xceed.Wpf.AvalonDock.resource
 D:\VS Projects\C#\kursivaya\kursivaya\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 D:\VS Projects\C#\kursivaya\kursivaya\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\kursivaya.csproj.CopyComplete
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\InfoWindow.g.cs
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\InfoWindow.baml
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\AuthorizationWindow.g.cs
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\AuthorizationWindow.baml

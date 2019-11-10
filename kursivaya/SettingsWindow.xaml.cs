@@ -19,23 +19,34 @@ namespace kursivaya
     /// </summary>
     public partial class SettingsWindow : Window
     {
+        private MainWindow mainWindow;
+
         public SettingsWindow()
         {
             InitializeComponent();
         }
 
-        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        public SettingsWindow(MainWindow mainwin)
         {
-            string test = IPmaskedTextBox.Text;
-            test = test.Replace("_", "");
-            test = test.Replace(',', '.');
-            MessageBox.Show(test);
+            InitializeComponent();
+            mainWindow = mainwin;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            IPmaskedTextBox.Text = "127.0.0.1";
-            PortmaskedTextBox.Text = "Надо потом добавить";
+            string ip = IPmaskedTextBox.Text;
+            ip = ip.Replace(" ", "");
+            string port = PortmaskedTextBox.Text;
+            mainWindow.SetServerAddress(ip, port);
+            //test = test.Replace(',', '.');
+            //MessageBox.Show(test);
+        }
+
+        private void defaultSettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            IPmaskedTextBox.Text = "127. 0 . 0 . 1 ";
+            PortmaskedTextBox.Text = "8005";
         }
     }
 }

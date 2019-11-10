@@ -17,9 +17,9 @@ namespace kursivaya
     /// <summary>
     /// Логика взаимодействия для Info.xaml
     /// </summary>
-    public partial class Info : Window
+    public partial class InfoWindow : Window
     {
-        public Info()
+        public InfoWindow()
         {
             InitializeComponent();
         }

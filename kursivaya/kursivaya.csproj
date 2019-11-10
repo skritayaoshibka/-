@@ -85,13 +85,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Info.xaml.cs">
-      <DependentUpon>Info.xaml</DependentUpon>
+    <Compile Include="AuthorizationWindow.xaml.cs">
+      <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Client.cs" />
+    <Compile Include="InfoWindow.xaml.cs">
+      <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Info.xaml">
+    <Compile Include="User.cs" />
+    <Page Include="AuthorizationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

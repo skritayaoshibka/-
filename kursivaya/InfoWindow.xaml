@@ -1,11 +1,11 @@
-﻿<Window x:Class="kursivaya.Info"
+﻿<Window x:Class="kursivaya.InfoWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursivaya"
         mc:Ignorable="d"
-        Title="Информация о программе" Height="450" Width="800">
+        Title="Информация о программе" Height="450" Width="800" Icon="Пикчи/4213426-about-description-help-info-information-notification_115427.ico">
     <Grid>
         
     </Grid>

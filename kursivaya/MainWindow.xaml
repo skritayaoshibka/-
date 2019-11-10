@@ -126,11 +126,12 @@
         <Label x:Name="usersCountLabel" Content="Пользователи в чате: 0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="214"/>
         <Label Content="Сообщения" HorizontalAlignment="Left" Margin="250,10,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="18"/>
         <ListBox x:Name="messagesListBox" Height="410" Margin="224,49,10,0" VerticalAlignment="Top" Padding="-4,0,0,0" BorderBrush="Black"/>
-        <Button x:Name="connectButton" HorizontalAlignment="Left" Margin="15,469,0,0" VerticalAlignment="Top" Width="204" Height="50" FontSize="18" Style="{DynamicResource connectButton}"/>
+        <Button x:Name="connectButton" HorizontalAlignment="Left" Margin="15,469,0,0" VerticalAlignment="Top" Width="204" Height="50" FontSize="18" Style="{DynamicResource connectButton}" Click="ConnectButton_Click"/>
         <Border BorderBrush="Black" BorderThickness="1" Margin="224,464,10,35.575" CornerRadius="5">
-            <TextBox x:Name="messageTextBox" TextWrapping="Wrap" Text="TextBox" Background="Transparent" BorderBrush="#00ABADB3" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="18" Margin="0,0,-1,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+            <TextBox x:Name="messageTextBox" TextWrapping="Wrap" Background="Transparent" BorderBrush="#00ABADB3" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="18" Margin="0,0,-1,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
         </Border>
-        <Button x:Name="infoButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="33" Template="{DynamicResource infoButton}" Height="33" Margin="644.678,11,0,0"/>
+        <Button x:Name="infoButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="33" Template="{DynamicResource infoButton}" Height="33" Margin="644.678,11,0,0" Click="InfoButton_Click"/>
+        <Label x:Name="test" Content="Label" HorizontalAlignment="Left" Margin="144,531,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
