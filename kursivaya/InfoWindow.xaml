@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursivaya"
         mc:Ignorable="d"
-        Title="Информация о программе" Height="450" Width="800" Icon="Пикчи/4213426-about-description-help-info-information-notification_115427.ico">
+        Title="Информация о программе" Height="450" Width="800" Icon="Пикчи/info_icon.ico">
     <Grid>
         
     </Grid>

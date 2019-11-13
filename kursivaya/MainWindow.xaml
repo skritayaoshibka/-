@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursivaya"
         mc:Ignorable="d"
-        Title="Чат" Height="595.575" Width="740.678" Icon="Пикчи/chat-bubble-outline_119299.ico">
+        Title="Чат" Height="595.575" Width="740.678" Icon="Пикчи/chat_icon.ico">
     <Window.Resources>
         <ControlTemplate x:Key="infoButton" TargetType="{x:Type Button}">
             <ControlTemplate.Resources>
                 <Storyboard x:Key="OnMouseEnter1"/>
             </ControlTemplate.Resources>
-            <Image x:Name="image" Height="Auto" Source="Пикчи/4213426-about-description-help-info-information-notification_115427.ico" Stretch="Fill" OpacityMask="Black"/>
+            <Image x:Name="image" Height="Auto" Source="Пикчи/info_icon.ico" Stretch="Fill" OpacityMask="Black"/>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="OpacityMask" TargetName="image" Value="#66000000"/>
@@ -58,7 +58,7 @@
                                 </ColorAnimationUsingKeyFrames>
                             </Storyboard>
                         </ControlTemplate.Resources>
-                        <Image x:Name="image" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Source="Пикчи/Gear.ico" OpacityMask="Black"/>
+                        <Image x:Name="image" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Source="Пикчи/settings_icon.ico" OpacityMask="Black"/>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefault" Value="False"/>
                             <Trigger Property="IsDefault" Value="False"/>
@@ -128,7 +128,7 @@
         <ListBox x:Name="messagesListBox" Height="410" Margin="224,49,10,0" VerticalAlignment="Top" Padding="-4,0,0,0" BorderBrush="Black"/>
         <Button x:Name="connectButton" HorizontalAlignment="Left" Margin="15,469,0,0" VerticalAlignment="Top" Width="204" Height="50" FontSize="18" Style="{DynamicResource connectButton}" Click="ConnectButton_Click"/>
         <Border BorderBrush="Black" BorderThickness="1" Margin="224,464,10,35.575" CornerRadius="5">
-            <TextBox x:Name="messageTextBox" TextWrapping="Wrap" Background="Transparent" BorderBrush="#00ABADB3" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="18" Margin="0,0,-1,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+            <TextBox x:Name="messageTextBox" TextWrapping="Wrap" Background="Transparent" BorderBrush="#00ABADB3" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="18" Margin="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" KeyDown="MessageTextBox_KeyDown"/>
         </Border>
         <Button x:Name="infoButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="33" Template="{DynamicResource infoButton}" Height="33" Margin="644.678,11,0,0" Click="InfoButton_Click"/>
         <Label x:Name="test" Content="Label" HorizontalAlignment="Left" Margin="144,531,0,0" VerticalAlignment="Top"/>

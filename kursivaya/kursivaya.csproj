@@ -149,13 +149,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Пикчи\Gear.ico" />
+    <Resource Include="Пикчи\settings_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Пикчи\chat-bubble-outline_119299.ico" />
+    <Resource Include="Пикчи\chat_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Пикчи\4213426-about-description-help-info-information-notification_115427.ico" />
+    <Resource Include="Пикчи\info_icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -168,6 +168,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Пикчи\auth_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,7 +7,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 
         mc:Ignorable="d"
-        Title="Настройки" Height="450" Width="393.061" Icon="Пикчи/Gear.ico">
+        Title="Настройки" Height="450" Width="393.061" Icon="Пикчи/settings_icon.ico">
     <Grid Margin="0,0,2,0">
 
         <Label Content="IP-адрес сервера" HorizontalAlignment="Left" Margin="20,29,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>

@@ -31,8 +31,8 @@ namespace kursivaya
         public MainWindow()
         {
             InitializeComponent();
-            IP = "127.0.0.1";
-            Port = "8005";
+            IP = "235.5.5.11";
+            Port = "8001";
             UserAuthorized = false;
         }
 
@@ -65,10 +65,57 @@ namespace kursivaya
 
             if (!UserAuthorized)
                 authwin.ShowDialog();
-            
-            client = new Client(IP, Port);
+
+            //Thread myThread = new Thread(Connect);
+            //myThread.Start(); // запускаем поток
+            client = new Client(IP, Port, this, user.Login);
             test.Content = client.Connect();
             client.SendMessage("hello");
+        }
+
+        //private void Connect()
+        //{
+           // client = new Client(IP, Port, this);
+            //test.Content = client.Connect();
+            //client.SendMessage("hello");
+        //}
+
+        public void ShowNewMessage(string message)
+        {
+            Dispatcher.BeginInvoke((Action)(delegate { this.messagesListBox.Items.Add(message); }));
+            Dispatcher.BeginInvoke((Action)(delegate { this.UpdateLayout(); }));
+        }
+
+        private void MessageTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key ==Key.Enter)
+            {
+                if (messageTextBox.Text.Length <=200)
+                client.SendMessage(messageTextBox.Text);
+                else
+                {
+                    int count = 0;
+                    while (true)
+                    {
+                        string text;
+                        int count2 = messageTextBox.Text.Length - count;
+                        if (count2 >= 200)
+                        {
+                            text = messageTextBox.Text.Substring(count, 200);
+                            count += 200;
+                        }
+                        else
+                        {
+                            text = messageTextBox.Text.Substring(count, count2);
+                            break;
+                        }
+
+                        client.SendMessage(text);
+
+                    }
+                }
+                messageTextBox.Text = "";
+            }
         }
     }
 }
