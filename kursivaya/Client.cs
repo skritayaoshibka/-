@@ -11,7 +11,7 @@ namespace kursivaya
 {
     class Client
     {
-        bool alive = false;
+        /*bool alive = false;
         UdpClient client;
         int Port;
         //string LOCALPORT; // порт для приема сообщений
@@ -44,7 +44,7 @@ namespace kursivaya
                 receiveTask.Start();
 
                 // отправляем первое сообщение о входе нового пользователя
-                string message = userName + " вошел в чат";
+                string message ="Пользователь " + userName + " вошел в чат";
                 byte[] data = Encoding.Unicode.GetBytes(message);
                 client.Send(data, data.Length, IP, Port);
 
@@ -71,12 +71,6 @@ namespace kursivaya
                     byte[] data = client.Receive(ref remoteIp);
                     string message = Encoding.Unicode.GetString(data);
                     Mainwindow.ShowNewMessage(message);
-                    // добавляем полученное сообщение в текстовое поле
-                    //this.Invoke(new MethodInvoker(() =>
-                    //{
-                    //string time = DateTime.Now.ToShortTimeString();
-                    //chatTextBox.Text = time + " " + message + "\r\n" + chatTextBox.Text;
-                    //}));
                 }
             }
             catch (ObjectDisposedException)
@@ -96,7 +90,8 @@ namespace kursivaya
         {
             try
             {
-                string fullMessage = String.Format("{0}: {1}", userName,message);
+                //DateTime date = new DateTime();
+                string fullMessage = String.Format("{0}\n{1}: {2}",DateTime.Now.ToShortTimeString (), userName,message);
                 byte[] data = Encoding.Unicode.GetBytes(fullMessage);
                 client.Send(data, data.Length, IP, Port);
                 //messageTextBox.Clear();
@@ -175,6 +170,7 @@ namespace kursivaya
 
         }
     }*/
+    }
 }
 //}
 

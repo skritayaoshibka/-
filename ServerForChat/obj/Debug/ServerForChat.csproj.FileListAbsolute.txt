@@ -1,0 +1,7 @@
+D:\VS Projects\C#\kursivaya\ServerForChat\bin\Debug\ServerForChat.exe.config
+D:\VS Projects\C#\kursivaya\ServerForChat\bin\Debug\ServerForChat.exe
+D:\VS Projects\C#\kursivaya\ServerForChat\bin\Debug\ServerForChat.pdb
+D:\VS Projects\C#\kursivaya\ServerForChat\obj\Debug\ServerForChat.csprojAssemblyReference.cache
+D:\VS Projects\C#\kursivaya\ServerForChat\obj\Debug\ServerForChat.csproj.CoreCompileInputs.cache
+D:\VS Projects\C#\kursivaya\ServerForChat\obj\Debug\ServerForChat.exe
+D:\VS Projects\C#\kursivaya\ServerForChat\obj\Debug\ServerForChat.pdb

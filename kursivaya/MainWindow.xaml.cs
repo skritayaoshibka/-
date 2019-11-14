@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace kursivaya
 {
     /// <summary>
@@ -21,19 +23,20 @@ namespace kursivaya
     /// </summary>
     public partial class MainWindow : Window
     {
+        private User user;
         public string IP { get; private set; }
         public string Port { get; private set; }
-        public bool UserAuthorized { get; private set; }
-        private Client client;
-        private User user;
-        
+        static TcpClient client;
+        static NetworkStream stream;
+        public bool IsUserAuthorized { get; private set; }
+
 
         public MainWindow()
         {
             InitializeComponent();
-            IP = "235.5.5.11";
-            Port = "8001";
-            UserAuthorized = false;
+            IP = "127.0.0.1";
+            Port = "8005";
+            IsUserAuthorized = false;
         }
 
         public void SetServerAddress(string ip, string port)
@@ -63,35 +66,42 @@ namespace kursivaya
         {
             AuthorizationWindow authwin = new AuthorizationWindow(this);
 
-            if (!UserAuthorized)
-                authwin.ShowDialog();
+            if (!IsUserAuthorized)
+            {
+                if (authwin.ShowDialog().HasValue == false)
+                    return;
+                IsUserAuthorized = true;
+            }
 
-            //Thread myThread = new Thread(Connect);
-            //myThread.Start(); // запускаем поток
-            client = new Client(IP, Port, this, user.Login);
-            test.Content = client.Connect();
-            client.SendMessage("hello");
-        }
 
-        //private void Connect()
-        //{
-           // client = new Client(IP, Port, this);
-            //test.Content = client.Connect();
-            //client.SendMessage("hello");
-        //}
+            client = new TcpClient();
+            try
+            {
+                client.Connect(IP, Convert.ToInt32(Port)); //подключение клиента
+                stream = client.GetStream(); // получаем поток
 
-        public void ShowNewMessage(string message)
-        {
-            Dispatcher.BeginInvoke((Action)(delegate { this.messagesListBox.Items.Add(message); }));
-            Dispatcher.BeginInvoke((Action)(delegate { this.UpdateLayout(); }));
+                string message = user.Login;
+                byte[] data = Encoding.Unicode.GetBytes(message);
+                stream.Write(data, 0, data.Length);
+
+                // запускаем новый поток для получения данных
+                Thread receiveThread = new Thread(new ThreadStart(ReceiveMessage));
+                receiveThread.Start(); //старт потока
+                messagesListBox.Items.Add("Добро пожаловать, " + user.Login);
+
+            }
+            catch (Exception ex)
+            {
+                messagesListBox.Items.Add(ex);
+            }
         }
 
         private void MessageTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key ==Key.Enter)
+            if (e.Key == Key.Enter)
             {
-                if (messageTextBox.Text.Length <=200)
-                client.SendMessage(messageTextBox.Text);
+                if (messageTextBox.Text.Length <= 200)
+                    SendMessage(messageTextBox.Text);
                 else
                 {
                     int count = 0;
@@ -107,15 +117,62 @@ namespace kursivaya
                         else
                         {
                             text = messageTextBox.Text.Substring(count, count2);
+                            SendMessage(text);
                             break;
                         }
 
-                        client.SendMessage(text);
-
+                        SendMessage(text);
                     }
                 }
                 messageTextBox.Text = "";
             }
         }
+
+        // отправка сообщений
+        private void SendMessage(string message)
+        {
+            message = String.Format("{0}\n{1}: {2}", DateTime.Now.ToShortTimeString(), user.Login, message);
+            byte[] data = Encoding.Unicode.GetBytes(message);
+            stream.Write(data, 0, data.Length);
+            messagesListBox.Items.Add(message);
+        }
+
+        // получение сообщений
+        private void ReceiveMessage()
+        {
+            while (true)
+            {
+                try
+                {
+                    byte[] data = new byte[64]; // буфер для получаемых данных
+                    StringBuilder builder = new StringBuilder();
+                    int bytes = 0;
+                    do
+                    {
+                        bytes = stream.Read(data, 0, data.Length);
+                        builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                    }
+                    while (stream.DataAvailable);
+
+                    string message = builder.ToString();
+                    Dispatcher.BeginInvoke((Action)(delegate { this.messagesListBox.Items.Add(message); }));
+                }
+                catch
+                {
+                    Dispatcher.BeginInvoke((Action)(delegate { this.messagesListBox.Items.Add("Соединение прекращено"); }));
+                }
+            }
+        }
+
+
+        private void Disconnect()
+        {
+            if (stream != null)
+                stream.Close();//отключение потока
+            if (client != null)
+                client.Close();//отключение клиента
+            Dispatcher.BeginInvoke((Action)(delegate { this.Close(); })); //завершение процесса
+        }
+
     }
 }
