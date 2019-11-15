@@ -18,17 +18,17 @@ using System.Windows.Shapes;
 
 namespace kursivaya
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : Window
     {
         private User user;
         public string IP { get; private set; }
         public string Port { get; private set; }
-        static TcpClient client;
-        static NetworkStream stream;
+        private TcpClient client;
+        private NetworkStream stream;
         public bool IsUserAuthorized { get; private set; }
+        public bool IsConnected { get; private set; }
+        private Thread receiveThread;
 
 
         public MainWindow()
@@ -37,12 +37,14 @@ namespace kursivaya
             IP = "127.0.0.1";
             Port = "8005";
             IsUserAuthorized = false;
+            IsConnected = false;
         }
 
         public void SetServerAddress(string ip, string port)
         {
             IP = ip;
             Port = port;
+            IsConnected = false;
         }
 
         public void SetUser(string login)
@@ -65,34 +67,45 @@ namespace kursivaya
         private void ConnectButton_Click(object sender, RoutedEventArgs e)
         {
             AuthorizationWindow authwin = new AuthorizationWindow(this);
-
-            if (!IsUserAuthorized)
+            if (!IsConnected)
             {
-                if (authwin.ShowDialog().HasValue == false)
-                    return;
-                IsUserAuthorized = true;
+                if (!IsUserAuthorized)
+                {
+                    if (authwin.ShowDialog().Value == false)
+                        return;
+                    IsUserAuthorized = true;
+                }
+
+
+                client = new TcpClient();
+                try
+                {
+                    client.Connect(IP, Convert.ToInt32(Port)); //подключение клиента
+                    stream = client.GetStream(); // получаем поток
+
+                    string message = user.Login;
+                    byte[] data = Encoding.Unicode.GetBytes(message);
+                    stream.Write(data, 0, data.Length);
+
+                    // запускаем новый поток для получения данных
+                    receiveThread = new Thread(new ThreadStart(ReceiveMessage));
+                    receiveThread.Start(); //старт потока
+                    messagesListBox.Items.Add("Добро пожаловать, " + user.Login);
+
+                }
+                catch (Exception ex)
+                {
+                    messagesListBox.Items.Add(ex);
+                }
+
+                connectButton.Style = (Style)connectButton.FindResource("connectButton");
+                IsConnected = true;
             }
-
-
-            client = new TcpClient();
-            try
+            else
             {
-                client.Connect(IP, Convert.ToInt32(Port)); //подключение клиента
-                stream = client.GetStream(); // получаем поток
-
-                string message = user.Login;
-                byte[] data = Encoding.Unicode.GetBytes(message);
-                stream.Write(data, 0, data.Length);
-
-                // запускаем новый поток для получения данных
-                Thread receiveThread = new Thread(new ThreadStart(ReceiveMessage));
-                receiveThread.Start(); //старт потока
-                messagesListBox.Items.Add("Добро пожаловать, " + user.Login);
-
-            }
-            catch (Exception ex)
-            {
-                messagesListBox.Items.Add(ex);
+                Disconnect();
+                connectButton.Style = (Style)connectButton.FindResource("disconnectButtonStyle");
+                IsConnected = false;
             }
         }
 
@@ -100,6 +113,18 @@ namespace kursivaya
         {
             if (e.Key == Key.Enter)
             {
+                if (messageTextBox.Text == "")
+                    return;
+                if (!IsConnected)
+                {
+                    MessageBox.Show("Вы не подключены", "Сообщение не отправлено",MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (!IsUserAuthorized)
+                {
+                    MessageBox.Show("Вы не авторизованы", "Сообщение не отправлено", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 if (messageTextBox.Text.Length <= 200)
                     SendMessage(messageTextBox.Text);
                 else
@@ -131,10 +156,13 @@ namespace kursivaya
         // отправка сообщений
         private void SendMessage(string message)
         {
-            message = String.Format("{0}\n{1}: {2}", DateTime.Now.ToShortTimeString(), user.Login, message);
+            message = String.Format("{0}\n{1}: {2}", DateTime.Now.ToString("hh:mm:ss"), user.Login, message);
             byte[] data = Encoding.Unicode.GetBytes(message);
             stream.Write(data, 0, data.Length);
+
             messagesListBox.Items.Add(message);
+            messagesListBox.SelectedIndex = messagesListBox.Items.Count-1;
+            messagesListBox.ScrollIntoView(messagesListBox.SelectedItem);
         }
 
         // получение сообщений
@@ -144,7 +172,7 @@ namespace kursivaya
             {
                 try
                 {
-                    byte[] data = new byte[64]; // буфер для получаемых данных
+                    byte[] data = new byte[64];
                     StringBuilder builder = new StringBuilder();
                     int bytes = 0;
                     do
@@ -160,6 +188,8 @@ namespace kursivaya
                 catch
                 {
                     Dispatcher.BeginInvoke((Action)(delegate { this.messagesListBox.Items.Add("Соединение прекращено"); }));
+                    Disconnect();
+                    break;
                 }
             }
         }
@@ -171,7 +201,6 @@ namespace kursivaya
                 stream.Close();//отключение потока
             if (client != null)
                 client.Close();//отключение клиента
-            Dispatcher.BeginInvoke((Action)(delegate { this.Close(); })); //завершение процесса
         }
 
     }

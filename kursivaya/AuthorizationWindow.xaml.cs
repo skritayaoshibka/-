@@ -38,7 +38,7 @@ namespace kursivaya
             {
                 mainwin.SetUser(loginTextBox.Text);
                 mainwin.Show();
-                this.Close();
+                this.DialogResult = true;
             }
         }
     }

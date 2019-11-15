@@ -48,5 +48,10 @@ namespace kursivaya
             IPmaskedTextBox.Text = "127. 0 . 0 . 1 ";
             PortmaskedTextBox.Text = "8005";
         }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

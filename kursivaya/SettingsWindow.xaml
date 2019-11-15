@@ -23,7 +23,7 @@
             <Button x:Name="acceptButton" Content="Применить" Background="#00DDDDDD" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="16" Click="AcceptButton_Click"/>
         </Border>
         <Border BorderBrush="Black" BorderThickness="2" Margin="231,350,31,20" CornerRadius="5">
-            <Button x:Name="cancelButton" Content="Отмена" Background="#00DDDDDD" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="16"/>
+            <Button x:Name="cancelButton" Content="Отмена" Background="#00DDDDDD" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="16" Click="CancelButton_Click"/>
         </Border>
         <Label Content="Порт" HorizontalAlignment="Left" Height="45.404" Margin="20,81.208,0,0" VerticalAlignment="Top" Width="144.963" FontFamily="Segoe UI Light" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="46" Margin="254,149,0,0" VerticalAlignment="Top" Width="109" CornerRadius="5">
