@@ -19,19 +19,27 @@ namespace kursivaya
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
-        private MainWindow mainwin;
+        private MainWindow mainwin;//Объект главного окна, вызвавшего это окно авторизации
 
         public AuthorizationWindow()
         {
             InitializeComponent();
         }
 
+        /*
+         * Перегруженный конструктор, который сохраняет информацию о главном окне, открышем это окно
+         */
         public AuthorizationWindow(MainWindow main)
         {
             InitializeComponent();
             mainwin = main;
         }
 
+        /*
+         * Функция, обрабатывающая нажатие кнопки "Авторизоваться"
+         * Если поле ввода логина не пустое, вызывается функция главного окна, записывающая логин
+         * Открывается окно, вызвавшее текущее
+         */
         private void AuthorizationButton_Click(object sender, RoutedEventArgs e)
         {
             if (loginTextBox.Text != "")

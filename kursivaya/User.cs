@@ -9,7 +9,6 @@ namespace kursivaya
     class User
     {
         public string Login { get; set; }
-        //public string Message { get; set; }
 
         public User(string login)
         {
