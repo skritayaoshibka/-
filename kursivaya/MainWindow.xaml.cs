@@ -10,15 +10,18 @@ namespace kursivaya
 
     public partial class MainWindow : Window
     {
-        private User user;                                //Объект класса, в котором содержится информация о пользователе
-        public string IP { get; private set; }            //IP-адрес сервера
-        public string Port { get; private set; }          //Порт для подключения к серверу
-        private TcpClient client;                         //Клиент, который подключается к серверу по протоколу TCP
-        private NetworkStream stream;                     //Поток для обмена информацией с сервером
-        public bool IsUserAuthorized { get; private set; }//Флаг авторизованности пользователя
-        public bool IsConnected { get; private set; }     //Флаг подключения к серверу
         private Thread receiveThread;                     //Поток, запускаемый для прослушки на наличие входящих сообщений
         private RC4 rc4 = new RC4();                      //Объект класса, используемый для шифрования/дешифрования
+        private User user;                                //Объект класса, в котором содержится информация о пользователе
+        private TcpClient client;                         //Клиент, который подключается к серверу по протоколу TCP
+        private NetworkStream stream;                     //Поток для обмена информацией с сервером
+        
+        public string IP { get; private set; }            //IP-адрес сервера
+        public string Port { get; private set; }          //Порт для подключения к серверу
+        
+        public bool IsUserAuthorized { get; private set; }//Флаг авторизованности пользователя
+        public bool IsConnected { get; private set; }     //Флаг подключения к серверу
+        
 
 
         /*
@@ -144,7 +147,7 @@ namespace kursivaya
                 //невозможно отправить пустое сообщение
                 if (messageTextBox.Text == "")
                     return;
-                
+
                 //выводится сообщение о том, что пользователь не подключен
                 if (!IsConnected)
                 {
@@ -158,50 +161,18 @@ namespace kursivaya
                     return;
                 }
 
-                /*
-                 * Следующие условия проверяют длину сообщения
-                 * Если длина меньше 200 символов, сообщение сразу же отправляется
-                 * Если длина больше 200 символов, цикл проходится по тексту, запоминая позицию крайнего пробера, если цикл прошел 200 символов, то отправляется сообщение до крайнего пробела  
-                 */
+                SendMessage(messageTextBox.Text);//функция для отправки сообщения на сервер
 
-                if (messageTextBox.Text.Length <= 200)
-                    SendMessage(messageTextBox.Text);//функция для отправки сообщения на сервер
-                else
-                {
-                    int count = 0;
-                    int space_position = 0;
-                    int begin = 0;
-                    string text = "";
-                    for (int i = 0; i < messageTextBox.Text.Length; i++)
-                    {
-                        if (messageTextBox.Text[i] == ' ')
-                        {
-                            space_position = i;
-                        }
-                        count++;
-                        if (count == 200)
-                        {
-                            text = messageTextBox.Text.Substring(begin, space_position - begin);
-                            SendMessage(text);//функция для отправки сообщения на сервер
-                            begin = space_position;
-                            count = 0;
-                            i = space_position + 1;
-                        }
-                    }
-                    text = messageTextBox.Text.Substring(begin, messageTextBox.Text.Length - begin);
-                    SendMessage(text);//функция для отправки сообщения на сервер
-                }
-                
-
+                int test = messageTextBox.Text.Length;
                 messageTextBox.Text = "";
             }
         }
 
-       /*
-        * Функция для шифрования и отправки сообщения на сервер
-        * В качестве аргумента - отправляемое сообщение
-        * Отправка осуществляется записью массива из байтов сообщения в поток
-        */
+        /*
+         * Функция для шифрования и отправки сообщения на сервер
+         * В качестве аргумента - отправляемое сообщение
+         * Отправка осуществляется записью массива из байтов сообщения в поток
+         */
         private void SendMessage(string message)
         {
             message = String.Format("{0}\n{1}: {2}", DateTime.Now.ToString("hh:mm:ss"), user.Login, message);//к сообщению добавляется текущее время и логин пользователя
@@ -209,7 +180,7 @@ namespace kursivaya
 
             data = rc4.Encrypt(data);
             stream.Write(data, 0, data.Length);
-            
+
             //отправленное сообщение добавляется в поле со всеми сообщениями
             messagesListBox.Items.Add(message);
             messagesListBox.SelectedIndex = messagesListBox.Items.Count - 1;

@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursivaya"
         mc:Ignorable="d"
-        Title="Информация о программе" Height="450" Width="800" Icon="Пикчи/info_icon.ico">
+        Title="Информация о программе" Height="667.03" Width="825.749" Icon="Пикчи/info_icon.ico" ResizeMode="CanMinimize">
     <Grid>
-        
+        <Border x:Name="___Без_имени_" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="609" Margin="10,10,0,0" VerticalAlignment="Top" Width="295"/>
+        <TextBlock x:Name="HowToUse_TextBlock" HorizontalAlignment="Left" Margin="20,57,0,0" TextWrapping="Wrap" Text="Как пользоваться программой?" VerticalAlignment="Top" FontSize="19" Height="25" MouseEnter="HowToUse_TextBlock_MouseEnter" MouseLeave="HowToUse_TextBlock_MouseLeave" MouseLeftButtonUp="HowToUse_TextBlock_MouseLeftButtonUp"/>
+        <TextBlock x:Name="Algorithms_TextBlock" HorizontalAlignment="Left" Margin="20,100,0,0" TextWrapping="Wrap" Text="Алгоритмы шифрования" VerticalAlignment="Top" FontSize="19" MouseEnter="Algorithms_TextBlock_MouseEnter" MouseLeave="Algorithms_TextBlock_MouseLeave" MouseLeftButtonUp="Algorithms_TextBlock_MouseLeftButtonUp"/>
+        <TextBlock x:Name="RC4_TextBlock" HorizontalAlignment="Left" Margin="48,130,0,0" TextWrapping="Wrap" Text="RC4" VerticalAlignment="Top" FontSize="17" MouseEnter="RC4_TextBlock_MouseEnter" MouseLeave="RC4_TextBlock_MouseLeave" MouseLeftButtonUp="RC4_TextBlock_MouseLeftButtonUp"/>
+        <TextBlock x:Name="A5_TextBlock" HorizontalAlignment="Left" Margin="35,160,0,0" TextWrapping="Wrap" Text="A5/1" VerticalAlignment="Top" FontSize="17" Width="56" TextAlignment="Center" MouseEnter="A5_TextBlock_MouseEnter" MouseLeave="A5_TextBlock_MouseLeave"/>
+        <TextBlock x:Name="About_TextBlock" HorizontalAlignment="Left" Margin="20,195,0,0" TextWrapping="Wrap" Text="О программе" VerticalAlignment="Top" FontSize="19" MouseEnter="About_TextBlock_MouseEnter" MouseLeave="About_TextBlock_MouseLeave" MouseLeftButtonUp="About_TextBlock_MouseLeftButtonUp"/>
+        <TextBlock x:Name="Info_TextBlock" HorizontalAlignment="Left" Margin="310,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="609" Width="499" FontSize="18" Text="Выберите пункт из меню слева"/>
     </Grid>
 </Window>

@@ -17,7 +17,7 @@ namespace kursivaya
             InitializationSBlock();
         }
 
-        void InitializationSBlock()
+        private void InitializationSBlock()
         {
             int L = Key.Length;
             for (int i = 0; i <= 255; i++)
