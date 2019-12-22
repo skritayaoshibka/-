@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -15,7 +16,8 @@ namespace kursivaya
         private User user;                                //Объект класса, в котором содержится информация о пользователе
         private TcpClient client;                         //Клиент, который подключается к серверу по протоколу TCP
         private NetworkStream stream;                     //Поток для обмена информацией с сервером
-        
+        private A5Enc a5;
+
         public string IP { get; private set; }            //IP-адрес сервера
         public string Port { get; private set; }          //Порт для подключения к серверу
         
@@ -107,7 +109,7 @@ namespace kursivaya
 
                     //отправляем серверу логин пользователя
                     string message = user.Login;
-                    byte[] data = Encoding.Unicode.GetBytes(message);
+                    byte[] data = Encoding.Default.GetBytes(message);
                     stream.Write(data, 0, data.Length);
 
                     //создаем новый поток для постоянного прослушивания потока на наличие сообщений
@@ -118,7 +120,7 @@ namespace kursivaya
                 }
                 catch (Exception ex)
                 {
-                    messagesListBox.Items.Add(ex);//если что-то пошло не так, выводим информацию об ошибке на экран
+                    messagesListBox.Items.Add("Сервер недоступен");//если что-то пошло не так, выводим информацию об ошибке на экран
                 }
 
                 //если все успешно изменяем кнопку "Подключиться" на "Отключиться", значения флага подключения устанавливается в true
@@ -162,8 +164,6 @@ namespace kursivaya
                 }
 
                 SendMessage(messageTextBox.Text);//функция для отправки сообщения на сервер
-
-                int test = messageTextBox.Text.Length;
                 messageTextBox.Text = "";
             }
         }
@@ -176,8 +176,9 @@ namespace kursivaya
         private void SendMessage(string message)
         {
             message = String.Format("{0}\n{1}: {2}", DateTime.Now.ToString("hh:mm:ss"), user.Login, message);//к сообщению добавляется текущее время и логин пользователя
-            byte[] data = Encoding.Unicode.GetBytes(message);
+            byte[] data = Encoding.Default.GetBytes(message);
 
+            data = A5Encyptor(data);
             data = rc4.Encrypt(data);
             stream.Write(data, 0, data.Length);
 
@@ -205,7 +206,7 @@ namespace kursivaya
                     do
                     {
                         bytes = stream.Read(data, 0, data.Length);
-                        builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                        builder.Append(Encoding.Default.GetString(data, 0, bytes));
                     }
                     while (stream.DataAvailable);
 
@@ -215,7 +216,8 @@ namespace kursivaya
                     {
                         message = message.Remove(0, 1);
                         message = message.Remove(message.Length - 1, 1);
-                        rc4.SetKey(Encoding.Unicode.GetBytes(message));
+                        rc4.SetKey(Encoding.Default.GetBytes(message));
+                        a5 = new A5Enc(Encoding.Default.GetBytes(message));
                         continue;
                     }
                     if (message.Substring(0, 8) == "<server>")
@@ -226,9 +228,10 @@ namespace kursivaya
                         continue;
                     }
 
-                    byte[] messageBytes = Encoding.Unicode.GetBytes(message);
+                    byte[] messageBytes = Encoding.Default.GetBytes(message);
                     messageBytes = rc4.Decrypt(messageBytes);
-                    message = Encoding.Unicode.GetString(messageBytes);
+                    messageBytes = A5Encyptor(messageBytes);
+                    message = Encoding.Default.GetString(messageBytes);
 
 
                     Dispatcher.BeginInvoke((Action)(delegate { messagesListBox.Items.Add(message); }));
@@ -255,6 +258,28 @@ namespace kursivaya
                 stream.Close();//отключение потока
             if (client != null)
                 client.Close();//отключение клиента
+        }
+
+        private byte[] A5Encyptor(byte[] data)
+        {
+
+            int[] frame = new int[1];
+            BitArray msgbits = new BitArray(data);
+            bool[] resbits = new bool[msgbits.Count];
+            int framesCount = msgbits.Length / 16;
+            //if ((msgbits.Length % 228) != 0)
+            //framesCount++;
+            //for (int i = 0; i < framesCount; i++)
+            //{
+            frame[0] = 1;
+            a5.KeySetup(frame);
+            bool[] KeyStream = a5.A5F(true, msgbits.Length);
+            for (int j = 0; j < msgbits.Length; j++)
+            {
+                resbits[j] = msgbits[j] ^ KeyStream[j];
+            }
+            //}
+            return a5.FromBoolToByte(resbits, false);
         }
 
     }

@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-D:\VS Projects\C#\kursivaya\kursivaya\obj\Debug\
+D:\VS Projects\C#\kursivaya\kursivaya\obj\Release\
 kursivaya
 none
 false
-DEBUG;TRACE
+TRACE
 D:\VS Projects\C#\kursivaya\kursivaya\App.xaml
 41856936514
 
@@ -16,5 +16,5 @@ D:\VS Projects\C#\kursivaya\kursivaya\App.xaml
 18753446923
 AuthorizationWindow.xaml;InfoWindow.xaml;MainWindow.xaml;SettingsWindow.xaml;
 
-False
+True
 
