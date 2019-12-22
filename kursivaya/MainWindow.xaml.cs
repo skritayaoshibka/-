@@ -12,11 +12,11 @@ namespace kursivaya
     public partial class MainWindow : Window
     {
         private Thread receiveThread;                     //Поток, запускаемый для прослушки на наличие входящих сообщений
-        private RC4 rc4 = new RC4();                      //Объект класса, используемый для шифрования/дешифрования
+        private RC4 rc4 = new RC4();                      //Объект класса, используемый для шифрования/дешифрования по алгоритму RC4
         private User user;                                //Объект класса, в котором содержится информация о пользователе
         private TcpClient client;                         //Клиент, который подключается к серверу по протоколу TCP
         private NetworkStream stream;                     //Поток для обмена информацией с сервером
-        private A5Enc a5;
+        private A5Enc a5;                                 //Объект класса, используемый для шифрования/дешифрования по алгоритму A5/1
 
         public string IP { get; private set; }            //IP-адрес сервера
         public string Port { get; private set; }          //Порт для подключения к серверу
@@ -260,6 +260,9 @@ namespace kursivaya
                 client.Close();//отключение клиента
         }
 
+        /*
+         * Функция для шифрования/дешифрования по алгоритму A5/1
+         */
         private byte[] A5Encyptor(byte[] data)
         {
 

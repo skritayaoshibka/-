@@ -119,5 +119,20 @@ namespace kursivaya
         {
             System.Diagnostics.Process.Start(e.Uri.ToString());
         }
+
+        private void A5_TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Info_TextBlock.Text = "                                             A5/1\n A5/1-это потоковый шифр, используемый для шифрования GSM (Group Special Mobile). \n" +
+" Алгоритм шифрования состоит из трех основных этапов:\n" +
+" 1. Инициализация регистров\n" +
+" 2. Управление тактированием\n" +
+" 3. Сложение по модулю 2 ключевого потока с кадром открытого текста\n" +
+" Дешифрование происходит по точно такому же алгоритму\n\n\n";
+            Run link = new Run("Подробнее");
+            Hyperlink hyperlink = new Hyperlink(link);
+            hyperlink.NavigateUri = new Uri("https://www.intuit.ru/studies/courses/552/408/lecture/9367?pa..");
+            hyperlink.RequestNavigate += LinkOnRequestNavigate;
+            Info_TextBlock.Inlines.Add(hyperlink);
+        }
     }
 }
