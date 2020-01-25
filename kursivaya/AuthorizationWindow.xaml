@@ -5,15 +5,108 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursivaya"
         mc:Ignorable="d"
-        Title="Авторизация" Height="462.262" Width="400.035" Icon="Пикчи/auth_icon.ico">
+        Title="Авторизация" Height="343" Width="271.5" Icon="Пикчи/auth_icon.ico" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="authorizationButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" SnapsToDevicePixels="true" Background="#FFDEDEDE" BorderBrush="Black" BorderThickness="2" CornerRadius="5">
+                            <Label Content="Авторизоваться" FontFamily="Segoe UI Light" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#B2DEDEDE"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF939393"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="exitButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" SnapsToDevicePixels="true" Background="#FFDEDEDE" BorderBrush="Black" BorderThickness="2" CornerRadius="5">
+                            <Label Content="Выход" FontFamily="Segoe UI Light" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#B2DEDEDE"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF939393"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="2" Height="51" Margin="81,83,81,0" VerticalAlignment="Top" Padding="1,0,0,0" Width="202" CornerRadius="5">
+        <Border BorderBrush="Black" BorderThickness="2" Height="51" Margin="13.217,146.757,0,0" VerticalAlignment="Top" Padding="1,0,0,0" CornerRadius="5" HorizontalAlignment="Left" Width="245.5">
             <TextBox x:Name="loginTextBox" TextWrapping="Wrap" FontFamily="Segoe UI Light" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="#00ABADB3" BorderThickness="0" MaxLength="15" Margin="2,-2,-2,2"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Height="49" Margin="83,349,79,0" VerticalAlignment="Top" CornerRadius="5">
-            <Button x:Name="authorizationButton" Content="Авторизоваться" Background="#00ACA7A7" BorderBrush="#00707070" BorderThickness="0" FontFamily="Segoe UI Light" FontSize="18" Click="AuthorizationButton_Click" Margin="2,-2,-2,2"/>
+        <Label Content="Логин" HorizontalAlignment="Left" Margin="13.217,124.757,0,0" VerticalAlignment="Top" Width="44" FontFamily="Segoe UI Light" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="22" FontSize="11"/>
+        <Button x:Name="authorizationButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168.018" Height="45.854" Margin="13.217,287.216,0,0" Style="{DynamicResource authorizationButton}"/>
+        <Label Content="Пароль" HorizontalAlignment="Left" Margin="13.217,199.216,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Light" Width="46" Height="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11"/>
+        <Border BorderBrush="Black" BorderThickness="2" Height="51" Margin="13.217,223.216,0,0" VerticalAlignment="Top" Padding="1,0,0,0" CornerRadius="5" HorizontalAlignment="Left" Width="245.5">
+            <PasswordBox x:Name="passwordTextBox" Margin="0" Background="#01FFFFFF" BorderThickness="0" BorderBrush="#00ABADB3" FontSize="18" FontFamily="Segoe UI Light" PasswordChar="*" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         </Border>
-        <Label Content="Логин" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="70" FontFamily="Segoe UI Light" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Image Margin="90.318,0,90.314,250.938" Source="Пикчи/auth_icon.ico" Stretch="Fill" Height="87.314" VerticalAlignment="Bottom" RenderTransformOrigin="0.654,0.555" Width="91"/>
+        <Label Content="Авторизация" Height="32.625" Margin="41.202,92.132,43.783,0" VerticalAlignment="Top" FontSize="18" FontFamily="Segoe UI Light" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="exitButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63.969" Height="45.854" Margin="194.748,287.216,0,0" Style="{DynamicResource exitButton}" Click="exitButton_Click"/>
 
     </Grid>
 </Window>

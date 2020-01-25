@@ -40,12 +40,18 @@ namespace kursivaya
          * Из полей ввода IP-адреса и порта считывается информация
          * Вызывается функция SetServerAddress главного окна, которая устанавливает IP-адрес и порт, к которому будет подключен клиент
          */
-        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
-            string ip = IPmaskedTextBox.Text;
-            ip = ip.Replace(" ", "");
-            string port = PortmaskedTextBox.Text;
-            mainWindow.SetServerAddress(ip, port);
+            if (IPmaskedTextBox.Text != "   .   .   .   " && PortmaskedTextBox.Text != "     ")
+            {
+                string ip = IPmaskedTextBox.Text;
+                ip = ip.Replace(" ", "");
+                string port = PortmaskedTextBox.Text;
+                mainWindow.SetServerAddress(ip, port);
+                MessageBox.Show("Настройки успешно сохранены", "Настройки", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+                MessageBox.Show("Заполните поля", "Настройки", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         /*
@@ -59,12 +65,17 @@ namespace kursivaya
         }
 
         /*
-        * Функция, обрабатывающая нажатие кнопки "Отмена"
+        * Функция, обрабатывающая нажатие кнопки "Выход"
         * Закрывает окно, не внося никаких изменений
         */
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void exitButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }
